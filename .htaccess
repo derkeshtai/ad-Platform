@@ -1,0 +1,60 @@
+# Ad Platform Security
+# Protección contra acceso directo a archivos PHP
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Permitir solo el archivo principal del plugin
+<FilesMatch "^(ad-platform\.php)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Proteger archivos de configuración
+<FilesMatch "^(composer\.json|composer\.lock|package\.json|\.git.*|\.env)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Deshabilitar listado de directorios
+Options -Indexes
+
+# Proteger contra inyección de código
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloquear acceso a archivos sensibles
+    RewriteRule ^(.*)\.(?:git|svn|env|htaccess)$ - [F,L]
+
+    # Prevenir inyección de código en URLs
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|[|%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|[|%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+    RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} php://input [NC,OR]
+    RewriteCond %{QUERY_STRING} mosConfig_[a-zA-Z_]{1,21}(=|%3D) [OR]
+    RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>|ê|"|;|\?|\*|=$).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*("|'|<|>|\|{||).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(%24&x).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(127\.0).* [NC,OR]
+    RewriteCond %{QUERY_STRING} ^.*(eval\(|execute\(|union.*select).* [NC]
+    RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+
+# Cabeceras de seguridad
+<IfModule mod_headers.c>
+    # Prevenir clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Prevenir XSS
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Prevenir MIME sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

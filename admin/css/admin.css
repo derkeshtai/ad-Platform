@@ -1,0 +1,137 @@
+/**
+ * Estilos del Panel de Administración
+ */
+
+/* Tabs */
+.adp-tab-content {
+    display: none;
+    background: white;
+    padding: 20px;
+    border: 1px solid #c3c4c7;
+    border-top: none;
+    margin-bottom: 20px;
+}
+
+.adp-tab-content.adp-tab-active {
+    display: block;
+}
+
+/* Settings */
+.adp-settings-tabs {
+    margin-top: 20px;
+}
+
+.adp-metabox table.form-table {
+    margin-top: 0;
+}
+
+/* Badges */
+.adp-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 3px;
+    background: #2271b1;
+    color: white;
+}
+
+.adp-badge-success {
+    background: #00a32a;
+}
+
+.adp-badge-warning {
+    background: #dba617;
+}
+
+.adp-badge-danger {
+    background: #d63638;
+}
+
+/* Product cards */
+.adp-product-card {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.adp-product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.adp-product-info {
+    flex: 1;
+}
+
+.adp-product-title {
+    font-weight: 600;
+    margin: 0 0 10px;
+}
+
+.adp-product-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 13px;
+    color: #646970;
+}
+
+.adp-product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* Stats */
+.adp-stats {
+    padding: 15px;
+    background: #f6f7f7;
+    border-radius: 4px;
+}
+
+.adp-stats p {
+    margin: 8px 0;
+}
+
+/* Loading */
+.adp-loading {
+    text-align: center;
+    padding: 20px;
+    color: #646970;
+}
+
+.adp-loading::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #2271b1;
+    border-radius: 50%;
+    animation: adp-spin 1s linear infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@keyframes adp-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+    .adp-product-card {
+        flex-direction: column;
+    }
+
+    .adp-product-actions {
+        flex-direction: row;
+    }
+}

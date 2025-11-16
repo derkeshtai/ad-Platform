@@ -1,0 +1,313 @@
+/**
+ * Estilos Públicos de Anuncios
+ */
+
+/* Contenedor de zona */
+.adp-zone {
+    margin: 20px 0;
+    position: relative;
+}
+
+/* Anuncio base */
+.adp-ad {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.adp-ad-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Banner de imagen */
+.adp-ad-banner {
+    text-align: center;
+}
+
+.adp-ad-banner img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Anuncio de texto */
+.adp-ad-text {
+    padding: 20px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.adp-ad-title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #212529;
+}
+
+.adp-ad-description {
+    margin: 0 0 15px;
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+.adp-ad-cta {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007bff;
+    color: white !important;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.adp-ad-cta:hover {
+    background: #0056b3;
+}
+
+/* Anuncio Nativo */
+.adp-ad-native {
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.adp-ad-label {
+    font-size: 11px;
+    color: #6c757d;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.adp-ad-image-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.adp-ad-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.adp-ad-link:hover .adp-ad-image {
+    transform: scale(1.05);
+}
+
+.adp-ad-content {
+    padding: 20px;
+}
+
+/* Anuncio de AliExpress - Card */
+.adp-ad-aliexpress-card {
+    max-width: 320px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.adp-ad-aliexpress-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.adp-ad-aliexpress-card .adp-ad-image-wrapper {
+    aspect-ratio: 1;
+    background: #f9fafb;
+}
+
+.adp-ad-aliexpress-card .adp-ad-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.adp-ad-aliexpress-card .adp-ad-title {
+    font-size: 16px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+    color: #111827;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.adp-ad-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.adp-stars {
+    color: #fbbf24;
+}
+
+.adp-rating-number {
+    font-weight: 600;
+    color: #374151;
+}
+
+.adp-orders {
+    color: #6b7280;
+}
+
+.adp-ad-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.adp-price-current {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ef4444;
+}
+
+.adp-price-original {
+    font-size: 16px;
+    color: #9ca3af;
+    text-decoration: line-through;
+}
+
+.adp-discount {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.adp-ad-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #d1fae5;
+    color: #059669;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.adp-ad-cta-wrapper {
+    margin-top: 16px;
+}
+
+.adp-ad-aliexpress-card .adp-ad-cta {
+    display: block;
+    text-align: center;
+    background: #ff6b00;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.adp-ad-aliexpress-card .adp-ad-cta:hover {
+    background: #e05d00;
+}
+
+/* Anuncio de AliExpress - Banner */
+.adp-ad-aliexpress-banner {
+    position: relative;
+}
+
+.adp-ad-aliexpress-banner .adp-ad-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+}
+
+.adp-ad-aliexpress-banner h3 {
+    margin: 0 0 10px;
+    color: white;
+}
+
+.adp-ad-aliexpress-banner .adp-price {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+/* Loading state */
+.adp-loading {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+}
+
+.adp-loading::before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    animation: adp-spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes adp-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .adp-ad-aliexpress-card {
+        max-width: 100%;
+    }
+
+    .adp-ad-text,
+    .adp-ad-native .adp-ad-content {
+        padding: 15px;
+    }
+
+    .adp-price-current {
+        font-size: 20px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .adp-ad-text {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+
+    .adp-ad-title {
+        color: #f8f9fa;
+    }
+
+    .adp-ad-description {
+        color: #adb5bd;
+    }
+
+    .adp-ad-native,
+    .adp-ad-aliexpress-card {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+
+    .adp-ad-aliexpress-card .adp-ad-title {
+        color: #f8f9fa;
+    }
+}
