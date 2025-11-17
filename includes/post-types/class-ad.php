@@ -141,6 +141,7 @@ class Ad_Platform_Ad_CPT {
         $use_short_link = get_post_meta($post->ID, '_adp_use_short_link', true) === '1';
         $weight = get_post_meta($post->ID, '_adp_weight', true) ?: 5;
         $commission = get_post_meta($post->ID, '_adp_commission', true) ?: 0;
+        $adult_content = get_post_meta($post->ID, '_adp_adult_content', true) === '1';
         ?>
         <div class="adp-metabox">
             <table class="form-table">
@@ -227,6 +228,17 @@ class Ad_Platform_Ad_CPT {
                     <td>
                         $<input type="number" name="adp_commission" value="<?php echo esc_attr($commission); ?>" min="0" step="0.01" class="small-text">
                         <p class="description"><?php _e('Por conversión (solo para tus reportes)', 'ad-platform'); ?></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><label><?php _e('Contenido Adulto', 'ad-platform'); ?></label></th>
+                    <td>
+                        <label>
+                            <input type="checkbox" name="adp_adult_content" value="1" <?php checked($adult_content); ?>>
+                            <?php _e('Este anuncio contiene contenido para adultos', 'ad-platform'); ?>
+                        </label>
+                        <p class="description"><?php _e('⚠️ Solo se mostrará en sitios configurados para contenido adulto (ej: suplementos, masajeadores, etc.)', 'ad-platform'); ?></p>
                     </td>
                 </tr>
             </table>
@@ -411,6 +423,7 @@ class Ad_Platform_Ad_CPT {
         // Checkboxes
         update_post_meta($post_id, '_adp_open_new_tab', isset($_POST['adp_open_new_tab']) ? '1' : '0');
         update_post_meta($post_id, '_adp_use_short_link', isset($_POST['adp_use_short_link']) ? '1' : '0');
+        update_post_meta($post_id, '_adp_adult_content', isset($_POST['adp_adult_content']) ? '1' : '0');
 
         // Arrays
         $devices = isset($_POST['adp_devices']) ? array_map('sanitize_text_field', $_POST['adp_devices']) : array();

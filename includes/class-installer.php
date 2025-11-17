@@ -126,6 +126,7 @@ class Ad_Platform_Installer {
             affiliate_url varchar(1000) NOT NULL,
             keywords text DEFAULT NULL,
             free_shipping tinyint(1) DEFAULT 0,
+            is_adult_content tinyint(1) DEFAULT 0,
             manual_weight int(3) DEFAULT 0,
             auto_score decimal(5,2) DEFAULT 0.00,
             status varchar(20) DEFAULT 'pending',
@@ -208,6 +209,7 @@ class Ad_Platform_Installer {
                 'products_to_consider' => 20,
                 'display_template' => 'card',
                 'cta_text' => 'Ver en AliExpress',
+                'adult_categories' => 'health,wellness,massage,supplements,bedroom', // Categorías adultas permitidas
             ),
 
             // Configuración de tracking

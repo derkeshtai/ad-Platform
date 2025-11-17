@@ -35,6 +35,7 @@
             const zoneId = zoneElement.dataset.zoneId;
             const keywords = zoneElement.dataset.keywords || this.extractPageKeywords();
             const category = zoneElement.dataset.category || '';
+            const adultSite = zoneElement.dataset.adultSite || this.config.adult_site || false;
 
             // Mostrar loading
             zoneElement.innerHTML = '<div class="adp-loading">Cargando anuncio...</div>';
@@ -45,7 +46,8 @@
                 keywords: keywords,
                 category: category,
                 device: this.getDeviceType(),
-                country: this.getCountryCode()
+                country: this.getCountryCode(),
+                adult_site: adultSite ? '1' : '0'
             });
 
             const apiUrl = this.config.api_url + 'ad/get?' + params.toString();

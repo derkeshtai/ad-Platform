@@ -165,6 +165,17 @@ $redirect = get_option('ad_platform_redirect', array());
                             </p>
                         </td>
                     </tr>
+                    <tr>
+                        <th><?php _e('Categorías de Adultos', 'ad-platform'); ?></th>
+                        <td>
+                            <textarea name="ad_platform_aliexpress[adult_categories]" rows="3" class="regular-text" style="width: 100%;"><?php echo esc_textarea($aliexpress['adult_categories'] ?? 'health,wellness,massage,supplements,bedroom'); ?></textarea>
+                            <p class="description">
+                                <?php _e('⚠️ Categorías de AliExpress permitidas para contenido adulto (separadas por comas).', 'ad-platform'); ?><br>
+                                <?php _e('Ejemplos: health, wellness, massage, supplements, bedroom, personal-care', 'ad-platform'); ?><br>
+                                <?php _e('Estos productos solo se mostrarán en sitios marcados como adultos (ej: xlatinas.com)', 'ad-platform'); ?>
+                            </p>
+                        </td>
+                    </tr>
                 </table>
             </div>
 

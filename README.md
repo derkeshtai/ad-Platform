@@ -16,6 +16,7 @@
 - ✅ Sistema de pesos/prioridad (1-10)
 - ✅ Programación de campañas (fechas, horarios, límites)
 - ✅ Targeting por país, dispositivo y keywords
+- ✅ **Filtrado de Contenido Adulto** (para sitios como xlatinas.com)
 - ✅ A/B Testing automático
 
 ### 🛒 Integración con AliExpress
@@ -260,6 +261,144 @@ window.adpConfig = {
 - ✅ HTML estático
 - ✅ Blogger/Blogspot
 - ✅ Cualquier sitio web
+
+---
+
+## 🔞 Filtrado de Contenido Adulto
+
+### ¿Para qué sirve?
+
+Esta funcionalidad te permite mostrar anuncios de productos para adultos **SOLO** en sitios destinados a ese público (como **xlatinas.com**), mientras mantienes anuncios regulares en tus otros sitios.
+
+### Tipos de Contenido Adulto Permitido
+
+✅ **SÍ permitido:**
+- Suplementos para adultos
+- Masajeadores personales
+- Productos de bienestar y salud
+- Artículos de dormitorio
+- Productos de cuidado personal
+
+❌ **NO permitido:**
+- Armas
+- Drogas
+- Contenido ilegal
+
+### Configurar Anuncios de Adultos
+
+#### 1. Marcar Anuncios Manuales
+
+```
+Ad Platform → Anuncios → Editar Anuncio
+```
+
+- Buscar la sección "Contenido Adulto"
+- ✅ Marcar checkbox "Este anuncio contiene contenido para adultos"
+- Guardar
+
+**Resultado:** Este anuncio **SOLO** se mostrará en sitios marcados como adultos.
+
+#### 2. Configurar Productos de AliExpress
+
+```
+Ad Platform → Configuración → AliExpress → Categorías de Adultos
+```
+
+Agregar categorías separadas por comas:
+```
+health,wellness,massage,supplements,bedroom,personal-care
+```
+
+Los productos de AliExpress de estas categorías se tratarán como contenido adulto.
+
+### Integrar en Sitios Adultos
+
+#### Para xlatinas.com (sitio adulto):
+
+```html
+<!-- En el <head> -->
+<script src="https://tudominio.com/wp-content/plugins/ad-platform/public/js/ad-sdk.js"></script>
+<script>
+window.adpConfig = {
+    api_url: 'https://tudominio.com/wp-json/adplatform/v1/',
+    home_url: 'https://tudominio.com',
+    adult_site: true  // ⚠️ IMPORTANTE: Habilitar contenido adulto
+};
+</script>
+<link rel="stylesheet" href="https://tudominio.com/wp-content/plugins/ad-platform/public/css/public.css">
+
+<!-- Zonas de anuncio -->
+<div class="adp-zone" data-zone-id="1" data-adult-site="true"></div>
+```
+
+#### Para dragoncuantico.com (sitio normal):
+
+```html
+<!-- En el <head> -->
+<script src="https://tudominio.com/wp-content/plugins/ad-platform/public/js/ad-sdk.js"></script>
+<script>
+window.adpConfig = {
+    api_url: 'https://tudominio.com/wp-json/adplatform/v1/',
+    home_url: 'https://tudominio.com',
+    adult_site: false  // Contenido normal
+};
+</script>
+<link rel="stylesheet" href="https://tudominio.com/wp-content/plugins/ad-platform/public/css/public.css">
+
+<!-- Zonas de anuncio -->
+<div class="adp-zone" data-zone-id="1"></div>
+```
+
+### Lógica de Filtrado
+
+```
+┌─────────────────────────────────────────┐
+│  Usuario visita xlatinas.com (adulto)   │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  SDK envía: adult_site = true           │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  API puede mostrar:                     │
+│  ✅ Anuncios adultos                    │
+│  ✅ Anuncios normales                   │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  Usuario visita dragoncuantico.com      │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  SDK envía: adult_site = false          │
+└─────────────────────────────────────────┘
+              ↓
+┌─────────────────────────────────────────┐
+│  API puede mostrar:                     │
+│  ✅ Anuncios normales SOLAMENTE         │
+│  ❌ Anuncios adultos (bloqueados)       │
+└─────────────────────────────────────────┘
+```
+
+### Ejemplos de Uso
+
+**Anuncio: "Suplemento Premium para Adultos"**
+- ✅ Marcado como contenido adulto
+- Se muestra en: xlatinas.com ✅
+- NO se muestra en: dragoncuantico.com ❌
+
+**Anuncio: "Hosting Hostinger"**
+- ⬜ NO marcado como adulto
+- Se muestra en: xlatinas.com ✅
+- Se muestra en: dragoncuantico.com ✅
+
+### Ventajas
+
+✅ **Cumplimiento**: Evita mostrar contenido adulto en sitios generales
+✅ **Segmentación**: Anuncios relevantes para cada audiencia
+✅ **Monetización**: Maximiza ingresos con productos específicos
+✅ **Flexible**: Un solo sistema gestiona todos tus sitios
 
 ---
 

@@ -44,6 +44,11 @@ class Ad_Platform_API {
                     'required' => false,
                     'type' => 'string',
                 ),
+                'adult_site' => array(
+                    'required' => false,
+                    'type' => 'boolean',
+                    'default' => false,
+                ),
             ),
         ));
 
@@ -94,6 +99,7 @@ class Ad_Platform_API {
         $category = $request->get_param('category');
         $country = $request->get_param('country');
         $device = $request->get_param('device') ?: 'desktop';
+        $adult_site = $request->get_param('adult_site') ?: false;
 
         // Buscar anuncio
         $ad = $this->find_best_ad(array(
@@ -102,6 +108,7 @@ class Ad_Platform_API {
             'category' => $category,
             'country' => $country,
             'device' => $device,
+            'adult_site' => $adult_site,
         ));
 
         if (!$ad) {
@@ -175,6 +182,24 @@ class Ad_Platform_API {
                 'compare' => 'LIKE',
             );
         }
+
+        // Filtrar por contenido adulto
+        // Si NO es sitio adulto, excluir anuncios adultos
+        if (empty($criteria['adult_site'])) {
+            $args['meta_query'][] = array(
+                'relation' => 'OR',
+                array(
+                    'key' => '_adp_adult_content',
+                    'value' => '0',
+                    'compare' => '=',
+                ),
+                array(
+                    'key' => '_adp_adult_content',
+                    'compare' => 'NOT EXISTS',
+                ),
+            );
+        }
+        // Si ES sitio adulto, mostrar todos (adultos y no adultos)
 
         $ads = get_posts($args);
 
