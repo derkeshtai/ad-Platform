@@ -67,11 +67,15 @@ final class Ad_Platform {
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-matcher.php';
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-aliexpress.php';
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-redirector.php';
+        require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-facebook-pixel.php';
+        require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-remarketing.php';
+        require_once AD_PLATFORM_PLUGIN_DIR . 'includes/class-backup.php';
 
         // Post Types
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/post-types/class-ad.php';
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/post-types/class-campaign.php';
         require_once AD_PLATFORM_PLUGIN_DIR . 'includes/post-types/class-zone.php';
+        require_once AD_PLATFORM_PLUGIN_DIR . 'includes/post-types/class-landing.php';
 
         // Admin
         if (is_admin()) {

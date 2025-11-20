@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) exit;
 $general = get_option('ad_platform_general', array());
 $aliexpress = get_option('ad_platform_aliexpress', array());
 $tracking = get_option('ad_platform_tracking', array());
+$facebook = get_option('ad_platform_facebook', array());
 $redirect = get_option('ad_platform_redirect', array());
 ?>
 
@@ -22,6 +23,7 @@ $redirect = get_option('ad_platform_redirect', array());
                 <a href="#general" class="nav-tab nav-tab-active"><?php _e('General', 'ad-platform'); ?></a>
                 <a href="#aliexpress" class="nav-tab"><?php _e('AliExpress', 'ad-platform'); ?></a>
                 <a href="#tracking" class="nav-tab"><?php _e('Tracking', 'ad-platform'); ?></a>
+                <a href="#facebook" class="nav-tab"><?php _e('Facebook Pixel', 'ad-platform'); ?></a>
                 <a href="#redirect" class="nav-tab"><?php _e('Redirección', 'ad-platform'); ?></a>
             </nav>
 
@@ -221,6 +223,99 @@ $redirect = get_option('ad_platform_redirect', array());
                         </td>
                     </tr>
                 </table>
+            </div>
+
+            <!-- Tab: Facebook Pixel -->
+            <div id="facebook" class="adp-tab-content">
+                <h2><?php _e('Integración con Facebook Pixel', 'ad-platform'); ?></h2>
+
+                <table class="form-table">
+                    <tr>
+                        <th><?php _e('Habilitar Facebook Pixel', 'ad-platform'); ?></th>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="ad_platform_facebook[enabled]" value="1" <?php checked(!empty($facebook['enabled'])); ?>>
+                                <?php _e('Activar tracking con Facebook Pixel', 'ad-platform'); ?>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Pixel ID', 'ad-platform'); ?></th>
+                        <td>
+                            <input type="text" name="ad_platform_facebook[pixel_id]" value="<?php echo esc_attr($facebook['pixel_id'] ?? ''); ?>" class="regular-text" placeholder="123456789012345">
+                            <p class="description"><?php _e('Tu ID de Facebook Pixel (15-16 digitos)', 'ad-platform'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Advanced Matching', 'ad-platform'); ?></th>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="ad_platform_facebook[advanced_matching]" value="1" <?php checked(!empty($facebook['advanced_matching'])); ?>>
+                                <?php _e('Habilitar Advanced Matching (email, nombre)', 'ad-platform'); ?>
+                            </label>
+                            <p class="description"><?php _e('Mejora la precision del tracking usando datos de usuarios logueados', 'ad-platform'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Eventos a Trackear', 'ad-platform'); ?></th>
+                        <td>
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="ad_platform_facebook[track_page_view]" value="1" <?php checked($facebook['track_page_view'] ?? true); ?>>
+                                    PageView
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="ad_platform_facebook[track_view_content]" value="1" <?php checked($facebook['track_view_content'] ?? true); ?>>
+                                    ViewContent (Landing Pages)
+                                </label>
+                            </p>
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="ad_platform_facebook[track_add_to_cart]" value="1" <?php checked(!empty($facebook['track_add_to_cart'])); ?>>
+                                    AddToCart (Clicks en CTA)
+                                </label>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Remarketing', 'ad-platform'); ?></th>
+                        <td>
+                            <label>
+                                <input type="checkbox" name="ad_platform_facebook[enable_remarketing]" value="1" <?php checked(!empty($facebook['enable_remarketing'])); ?>>
+                                <?php _e('Habilitar carrusel de productos vistos', 'ad-platform'); ?>
+                            </label>
+                            <p class="description"><?php _e('Muestra productos que el usuario ha visitado anteriormente', 'ad-platform'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Productos en Carrusel', 'ad-platform'); ?></th>
+                        <td>
+                            <input type="number" name="ad_platform_facebook[carousel_items]" value="<?php echo esc_attr($facebook['carousel_items'] ?? 5); ?>" min="1" max="10" class="small-text">
+                            <p class="description"><?php _e('Cantidad de productos a mostrar en el carrusel (1-10)', 'ad-platform'); ?></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><?php _e('Filtrar por Plataforma', 'ad-platform'); ?></th>
+                        <td>
+                            <select name="ad_platform_facebook[carousel_platform]">
+                                <option value="" <?php selected($facebook['carousel_platform'] ?? '', ''); ?>><?php _e('Todas las plataformas', 'ad-platform'); ?></option>
+                                <option value="aliexpress" <?php selected($facebook['carousel_platform'] ?? '', 'aliexpress'); ?>>AliExpress</option>
+                                <option value="hotmart" <?php selected($facebook['carousel_platform'] ?? '', 'hotmart'); ?>>Hotmart</option>
+                                <option value="fiverr" <?php selected($facebook['carousel_platform'] ?? '', 'fiverr'); ?>>Fiverr</option>
+                                <option value="hostinger" <?php selected($facebook['carousel_platform'] ?? '', 'hostinger'); ?>>Hostinger</option>
+                            </select>
+                            <p class="description"><?php _e('Mostrar solo productos de una plataforma especifica', 'ad-platform'); ?></p>
+                        </td>
+                    </tr>
+                </table>
+
+                <h3><?php _e('Shortcode de Carrusel', 'ad-platform'); ?></h3>
+                <p class="description">
+                    <?php _e('Usa el siguiente shortcode para mostrar productos vistos:', 'ad-platform'); ?>
+                    <code>[adp_remarketing_carousel limit="5" platform="aliexpress"]</code>
+                </p>
             </div>
 
             <!-- Tab: Redirección -->

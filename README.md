@@ -58,6 +58,29 @@
 - ✅ Renderizado responsive
 - ✅ Tracking automático
 
+### 📄 Landing Pages de Productos
+- ✅ Custom Post Type para landing pages de afiliados
+- ✅ Generación automática desde AliExpress
+- ✅ Templates profesionales y responsivos
+- ✅ Galería de imágenes interactiva
+- ✅ Integración con Facebook Pixel
+- ✅ SEO optimizado
+- ✅ Taxonomía por plataforma (AliExpress, Hotmart, Fiverr, etc.)
+
+### 📱 Facebook Pixel & Remarketing
+- ✅ Integración completa con Facebook Pixel
+- ✅ Tracking de PageView, ViewContent, AddToCart
+- ✅ Advanced Matching para mejor precisión
+- ✅ **Carrusel de productos vistos** (remarketing)
+- ✅ Widget y shortcodes para productos recientes
+- ✅ Filtrado por plataforma
+
+### 💾 Backup y Restauración
+- ✅ Exportar configuraciones y contenido a JSON
+- ✅ Importar desde backup
+- ✅ Opciones selectivas (solo settings, solo contenido)
+- ✅ Opción de sobrescribir o mantener existentes
+
 ### 🔒 Seguridad
 - ✅ Archivos `.htaccess` en todos los directorios
 - ✅ Sanitización y validación de datos
@@ -440,6 +463,178 @@ Ad Platform → AliExpress → Buscar
 
 ---
 
+## 📄 Landing Pages de Productos
+
+### ¿Qué son?
+
+Landing pages completas para productos de afiliados. En lugar de solo mostrar banners, puedes crear páginas de producto con toda la información, imágenes, especificaciones y botones CTA.
+
+### Crear Landing Pages
+
+#### Desde AliExpress (Automático)
+
+1. **Ir a Ad Platform → AliExpress → Aprobados**
+2. **Click en "Crear Landing"** junto al producto
+3. **Se genera automáticamente:**
+   - Título
+   - Descripción
+   - Imágenes
+   - Precio y descuento
+   - Rating y ventas
+   - Botón CTA
+
+#### Manualmente (Otros programas)
+
+1. **Ir a Ad Platform → Productos → Añadir Nuevo**
+2. **Completar información:**
+   - Título del producto
+   - Descripción completa
+   - Imagen destacada
+   - Galería de imágenes
+   - Características (una por línea)
+   - Especificaciones (Nombre: Valor por línea)
+   - URL de afiliado
+   - Precio, rating, etc.
+3. **Seleccionar plataforma:** Hotmart, Fiverr, Hostinger, etc.
+4. **Publicar**
+
+### Shortcodes
+
+```php
+// Mostrar productos recientes
+[adp_products limit="6" platform="aliexpress"]
+
+// Carrusel de productos
+[adp_remarketing_carousel limit="5" title="Productos que viste"]
+```
+
+### URLs
+
+- Producto individual: `tudominio.com/producto/nombre-producto/`
+- Archivo de productos: `tudominio.com/productos/`
+- Por plataforma: `tudominio.com/plataforma/aliexpress/`
+
+---
+
+## 📱 Facebook Pixel & Remarketing
+
+### Configurar Facebook Pixel
+
+1. **Obtener Pixel ID**
+   - Ir a [Facebook Business Manager](https://business.facebook.com/)
+   - Events Manager → Conectar origen de datos → Web → Facebook Pixel
+   - Copiar el Pixel ID (15-16 dígitos)
+
+2. **Configurar en el Plugin**
+
+```
+Ad Platform → Configuración → Facebook Pixel
+```
+
+- ✅ Habilitar Facebook Pixel
+- **Pixel ID**: Pegar tu ID
+- **Advanced Matching**: Habilitar para mejor precisión
+- **Eventos**: Seleccionar qué trackear (PageView, ViewContent, AddToCart)
+
+### Eventos Trackeados
+
+| Evento | Cuándo se dispara | Datos enviados |
+|--------|-------------------|----------------|
+| PageView | Cada página | URL, referrer |
+| ViewContent | Landing page de producto | product_id, price, currency |
+| AddToCart | Click en botón CTA | product_id, price |
+
+### Carrusel de Remarketing
+
+Muestra productos que el usuario ha visto recientemente (como Instagram/Facebook).
+
+#### Shortcode
+
+```php
+// Carrusel con 5 productos
+[adp_remarketing_carousel limit="5" title="Productos que viste"]
+
+// Solo productos de AliExpress
+[adp_remarketing_carousel limit="5" platform="aliexpress"]
+
+// Lista simple
+[adp_recently_viewed limit="3" style="list"]
+
+// Cuadrícula
+[adp_recently_viewed limit="6" style="grid"]
+```
+
+#### Widget
+
+1. **Ir a Apariencia → Widgets**
+2. **Arrastrar "Ad Platform - Productos Vistos"** a sidebar
+3. **Configurar:**
+   - Título
+   - Cantidad de productos
+   - Plataforma (opcional)
+   - Estilo (lista/cuadrícula)
+
+### Configuración del Carrusel
+
+```
+Ad Platform → Configuración → Facebook Pixel → Remarketing
+```
+
+- ✅ Habilitar carrusel de productos vistos
+- **Cantidad**: 1-10 productos
+- **Filtrar por plataforma**: Todas, solo AliExpress, solo Hotmart, etc.
+
+---
+
+## 💾 Backup y Restauración
+
+### ¿Para qué sirve?
+
+- Crear copias de seguridad de toda la configuración
+- Migrar a otro servidor
+- Restaurar rápidamente si algo sale mal
+- Guardar diferentes versiones de configuración
+
+### Exportar Backup
+
+```
+Ad Platform → Backup → Exportar
+```
+
+1. **Seleccionar qué exportar:**
+   - ✅ Configuraciones del plugin
+   - ✅ Anuncios
+   - ✅ Campañas
+   - ✅ Zonas
+   - ✅ Landing Pages
+   - ✅ Productos de AliExpress
+
+2. **Click en "Descargar Backup"**
+3. **Se descarga archivo JSON** con toda la información
+
+### Importar Backup
+
+```
+Ad Platform → Backup → Importar
+```
+
+1. **Seleccionar archivo JSON** de backup anterior
+2. **Opciones:**
+   - ✅ Importar configuraciones
+   - ✅ Importar contenido
+   - ⬜ Sobrescribir existentes (cuidado)
+3. **Click en "Importar Backup"**
+4. **Ver resultado:** X configuraciones, X posts, X términos importados
+
+### Buenas Prácticas
+
+- **Backup semanal**: Programar exportación cada semana
+- **Antes de cambios**: Siempre hacer backup antes de cambios importantes
+- **Guardar en la nube**: Subir backups a Google Drive, Dropbox, etc.
+- **Probar restauración**: Verificar que el backup funciona en sitio de prueba
+
+---
+
 ## 📊 Ver Estadísticas
 
 ```
@@ -675,16 +870,24 @@ Desarrollado por [DerKeshtai](https://github.com/derkeshtai)
 
 ## 🎯 Roadmap
 
+### Características Completadas
+- [x] Landing Pages de productos
+- [x] Facebook Pixel integrado
+- [x] Carrusel de remarketing
+- [x] Sistema de backup/restauración
+- [x] Widget de productos vistos
+- [x] Filtrado de contenido adulto
+
 ### Próximas Características
 - [ ] Integración con más redes de afiliados (Amazon, ClickBank, ShareASale)
 - [ ] Machine Learning para optimización automática
 - [ ] Bloque de Gutenberg
-- [ ] Widget de WordPress
 - [ ] Exportar reportes a CSV/PDF
 - [ ] Audiencias personalizadas de Facebook
 - [ ] Integración con Google Analytics
 - [ ] Sistema de notificaciones por email
 - [ ] API pública para terceros
+- [ ] Editor visual de landing pages
 
 ---
 

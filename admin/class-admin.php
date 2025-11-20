@@ -44,6 +44,16 @@ class Ad_Platform_Admin {
             'adp-stats',
             [$this, 'render_stats_page']
         );
+
+        // Submenu: Backup
+        add_submenu_page(
+            'edit.php?post_type=adp_ad',
+            __('Backup', 'ad-platform'),
+            __('Backup', 'ad-platform'),
+            'manage_options',
+            'adp-backup',
+            [$this, 'render_backup_page']
+        );
     }
 
     /**
@@ -54,6 +64,7 @@ class Ad_Platform_Admin {
         register_setting('ad_platform_general', 'ad_platform_general');
         register_setting('ad_platform_aliexpress', 'ad_platform_aliexpress');
         register_setting('ad_platform_tracking', 'ad_platform_tracking');
+        register_setting('ad_platform_facebook', 'ad_platform_facebook');
         register_setting('ad_platform_redirect', 'ad_platform_redirect');
     }
 
@@ -117,6 +128,9 @@ class Ad_Platform_Admin {
             if (isset($_POST['ad_platform_tracking'])) {
                 update_option('ad_platform_tracking', $_POST['ad_platform_tracking']);
             }
+            if (isset($_POST['ad_platform_facebook'])) {
+                update_option('ad_platform_facebook', $_POST['ad_platform_facebook']);
+            }
             if (isset($_POST['ad_platform_redirect'])) {
                 update_option('ad_platform_redirect', $_POST['ad_platform_redirect']);
             }
@@ -171,5 +185,16 @@ class Ad_Platform_Admin {
         }
 
         include AD_PLATFORM_PLUGIN_DIR . 'admin/views/stats.php';
+    }
+
+    /**
+     * Renderizar página de backup
+     */
+    public function render_backup_page() {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+
+        include AD_PLATFORM_PLUGIN_DIR . 'admin/views/backup.php';
     }
 }
